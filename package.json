@@ -1,0 +1,47 @@
+{
+  "name": "react-typescript-graphql-fullstack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon dist/index.js",
+    "watch": "tsc -w",
+    "start": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SirCen/react-typescript-graphql-fullstack.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SirCen/react-typescript-graphql-fullstack/issues"
+  },
+  "homepage": "https://github.com/SirCen/react-typescript-graphql-fullstack#readme",
+  "devDependencies": {
+    "@types/express": "^4.17.11",
+    "@types/node": "^14.14.37",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.4"
+  },
+  "dependencies": {
+    "@mikro-orm/cli": "^4.5.3",
+    "@mikro-orm/core": "^4.5.3",
+    "@mikro-orm/migrations": "^4.5.3",
+    "@mikro-orm/postgresql": "^4.5.3",
+    "apollo-server-express": "^2.22.2",
+    "express": "^4.17.1",
+    "graphql": "^15.5.0",
+    "nodemon": "^2.0.7",
+    "pg": "^8.5.1",
+    "type-graphql": "^1.1.1"
+  },
+  "mikro-orm": {
+    "useTsNode": true,
+    "configPaths": [
+      "./src/mikro-orm.config.ts",
+      "./dist/mikro-orm.config.js"
+    ]
+  }
+}
