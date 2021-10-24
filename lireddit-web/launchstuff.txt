@@ -1,0 +1,4 @@
+yarn dev in server and web, launch redis, 
+
+localhost:3000
+localhost:4000/graphql
