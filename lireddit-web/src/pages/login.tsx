@@ -32,7 +32,7 @@ const Login: React.FC<{}> = ({}) => {
           <Box mt={4}>
             <InputField name="password" placeholder="password" label="Password" type="password"/>
           </Box>
-          <Button mt={4} type="submit" isLoading={isSubmitting}>Login</Button>
+          <Button mt={4} type="submit" colorScheme="teal" isLoading={isSubmitting}>Login</Button>
         </Form>
       )}
       </Formik>
