@@ -1,21 +1,11 @@
 import { User } from "../entities/User";
 import { MyContext } from "../types";
-import { Arg, Ctx, Field, InputType, Mutation, ObjectType, Query, Resolver } from "type-graphql";
+import { Arg, Ctx, Field, Mutation, ObjectType, Query, Resolver } from "type-graphql";
 import argon2 from 'argon2';
 import {EntityManager} from "@mikro-orm/postgresql";
 import { COOKIE_NAME, __prod__ } from "../constants";
-
-@InputType()
-class UsernamePasswordInput {
-    @Field()
-    email: string;
-    
-    @Field()
-    username: string;
-
-    @Field()
-    password: string;
-}
+import { UsernamePasswordInput } from "./UsernamePasswordInput";
+import { validateRegister } from "src/utils/validateRegister";
 
 @ObjectType()
 class FieldError {
@@ -60,35 +50,9 @@ export class UserResolver {
         @Arg('options', () => UsernamePasswordInput) options: UsernamePasswordInput,
         @Ctx() {em, req}: MyContext
     ): Promise<UserResponse> {
-        if (!options.email.includes("@")){
-            return {
-                errors: [
-                    {
-                        field: 'email',
-                        message: 'Invalid email address' 
-                    },
-                ],
-            };
-        }
-        if (options.username.length <= 2){
-            return {
-                errors: [
-                    {
-                        field: 'username',
-                        message: 'Username length must be greater than 2' 
-                    },
-                ],
-            };
-        }
-        if (options.password.length <= 3){
-            return {
-                errors: [
-                    {
-                        field: 'password',
-                        message: 'Password length must be greater than 3' 
-                    },
-                ],
-            };
+        const errors = validateRegister(options);
+        if (errors) {
+            return {errors};
         }
         
         const hashedPassword = await argon2.hash(options.password);
