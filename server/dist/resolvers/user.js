@@ -69,6 +69,11 @@ UserResponse = __decorate([
     type_graphql_1.ObjectType()
 ], UserResponse);
 let UserResolver = class UserResolver {
+    forgotPassword(email, { em }) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return true;
+        });
+    }
     me({ req, em }) {
         return __awaiter(this, void 0, void 0, function* () {
             if (!req.session.userId) {
@@ -162,10 +167,7 @@ let UserResolver = class UserResolver {
     logout({ req, res }) {
         return __awaiter(this, void 0, void 0, function* () {
             return new Promise((resolve) => req.session.destroy((err) => {
-                res.clearCookie(constants_1.COOKIE_NAME, {
-                    domain: constants_1.__prod__ ? '.codeponder.com' : '',
-                    path: '/',
-                });
+                res.clearCookie(constants_1.COOKIE_NAME);
                 if (err) {
                     console.log(err);
                     resolve(false);
@@ -176,6 +178,14 @@ let UserResolver = class UserResolver {
         });
     }
 };
+__decorate([
+    type_graphql_1.Mutation(() => Boolean),
+    __param(0, type_graphql_1.Arg('email')),
+    __param(1, type_graphql_1.Ctx()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "forgotPassword", null);
 __decorate([
     type_graphql_1.Query(() => User_1.User, { nullable: true }),
     __param(0, type_graphql_1.Ctx()),
